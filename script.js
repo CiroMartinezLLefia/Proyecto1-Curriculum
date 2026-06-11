@@ -1,112 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // ==========================================================================
-  // Theme Switcher Logic
-  // ==========================================================================
-  const themeToggle = document.getElementById('theme-toggle');
-  const body = document.body;
+const experience = [
+  {
+    title: "Front-End Developer — Dropbox",
+    date: "Mar. 2020 - Present",
+    content: "Describe your responsibilities.  Tum dicere exorsus est cur verear, ne ad id omnia referri oporteat, ipsum per se ipsam voluptatem, quia consequuntur magni dolores eos, qui blanditiis praesentium voluptatum deleniti atque insitam in ea quid est eligendi optio, cumque nihil ut ipsi auctori huius disciplinae placet: constituam, quid.",
+  },
 
-  // Retrieve theme from local storage or check system preferences
-  const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  {
+    title: "Visual Designer — OutboundEngine",
+    date: "Sept. 2017 - Mar. 2020",
+    content: "Describe your responsibilities.  Tum dicere exorsus est cur verear, ne ad id omnia referri oporteat, ipsum per se ipsam voluptatem, quia consequuntur magni dolores eos, qui blanditiis praesentium voluptatum deleniti atque insitam in ea quid est eligendi optio, cumque nihil ut ipsi auctori huius disciplinae placet: constituam, quid.",
+  },
 
-  const setDarkTheme = () => {
-    body.classList.remove('light-theme');
-    body.classList.add('dark-theme');
-    localStorage.setItem('theme', 'dark');
-  };
+  {
+    title: "Lead Designer — Scrypt, Inc.",
+    date: "Jun. 2014 - Sept. 2017",
+    content: "Describe your responsibilities.  Tum dicere exorsus est cur verear, ne ad id omnia referri oporteat, ipsum per se ipsam voluptatem, quia consequuntur magni dolores eos, qui blanditiis praesentium voluptatum deleniti atque insitam in ea quid est eligendi optio, cumque nihil ut ipsi auctori huius disciplinae placet: constituam, quid.",
+  },
 
-  const setLightTheme = () => {
-    body.classList.remove('dark-theme');
-    body.classList.add('light-theme');
-    localStorage.setItem('theme', 'light');
-  };
-
-  // Initial theme check
-  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-    setDarkTheme();
-  } else {
-    setLightTheme();
+  {
+    title: "UI Designer — Pinger Inc.",
+    date: "Jun. 2014 - Sept. 2017",
+    content: "Describe your responsibilities.  Tum dicere exorsus est cur verear, ne ad id omnia referri oporteat, ipsum per se ipsam voluptatem, quia consequuntur magni dolores eos, qui blanditiis praesentium voluptatum deleniti atque insitam in ea quid est eligendi optio, cumque nihil ut ipsi auctori huius disciplinae placet: constituam, quid.",
   }
+]
 
-  // Toggle button event listener
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      if (body.classList.contains('light-theme')) {
-        setDarkTheme();
-      } else {
-        setLightTheme();
-      }
-    });
-  }
+var experienceDiv = document.querySelector("#fill");
+experienceDiv.innerHTML = "";
 
-  // ==========================================================================
-  // Dynamic Year Update
-  // ==========================================================================
-  const yearSpan = document.getElementById('year');
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
-
-  // ==========================================================================
-  // Copy to Clipboard (Email & Phone)
-  // ==========================================================================
-  const emailLink = document.getElementById('email-link');
-  const phoneLink = document.getElementById('phone-link');
-
-  const handleCopy = (textToCopy, displayType) => {
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => {
-        showToast(`${displayType} copiat al porta-retalls!`);
-      })
-      .catch((err) => {
-        console.error('Error copying text to clipboard: ', err);
-      });
-  };
-
-  if (emailLink) {
-    emailLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      handleCopy('ciromartinezmartin@gmail.com', 'Correu electrònic');
-    });
-  }
-
-  if (phoneLink) {
-    phoneLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      handleCopy('+34 691 93 13 27', 'Telèfon');
-    });
-  }
-
-  // ==========================================================================
-  // Toast Notification System
-  // ==========================================================================
-  const showToast = (message) => {
-    let container = document.getElementById('toast-container');
-    
-    // Create container if it doesn't exist
-    if (!container) {
-      container = document.createElement('div');
-      container.id = 'toast-container';
-      document.body.appendChild(container);
-    }
-
-    // Create toast element
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    container.appendChild(toast);
-
-    // Animate in
-    setTimeout(() => {
-      toast.classList.add('show');
-    }, 10);
-
-    // Animate out and remove
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => {
-        toast.remove();
-      }, 300); // Wait for CSS opacity transition
-    }, 3000);
-  };
-});
+for (let i = 0; i < experience.length; i++) {
+  experienceDiv.innerHTML += `
+        <div class="job">
+            <div class="titlePart">
+                <h3>${experience[i].title}</h3>
+                <p class="date">${experience[i].date}</p>
+            </div>
+            <p>${experience[i].content}</p>
+        </div>
+    `
+}
